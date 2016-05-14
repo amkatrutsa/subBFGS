@@ -9,7 +9,7 @@
 
 subBFGSBase::subBFGSBase(double epsilon, int k_max, double h) :
                         epsilon_(epsilon), k_max_(k_max), h_(h), N_(0), eta_(0),
-                        obj_(0), num_iter_(0), MAX_NUM_ITER_(10000),
+                        obj_(0), num_iter_(0), MAX_NUM_ITER_(1000000),
                         OBJ_TOL_(1e-9) {}
 
 bool subBFGSBase::solve() {
@@ -35,7 +35,6 @@ bool subBFGSBase::solve() {
             if (!DescentDirection(g)) {
                 return true;
             }
-//            std::cout << "Descent direction = \n" << p_ << std::endl;
             if (!LineSearchStep()) {
                 std::cout << "Error in computing step size!" << std::endl;
                 return false;
@@ -59,7 +58,6 @@ bool subBFGSBase::solve() {
                 if (!DescentDirection(g)) {
                     return true;
                 }
-//                std::cout << "Descent direction = \n" << p_ << std::endl;
                 if (!LineSearchStep()) {
                     std::cout << "Error in computing step size!" << std::endl;
                     return false;
@@ -124,7 +122,8 @@ bool subBFGSBase::DescentDirection(const VectorXd& g) {
         printf("Start correcting procedure for non-smooth point...\n");
     while (((pg_asup > 0) || (epsilon > epsilon_)) &&
             (i < k_max_) && (epsilon > 0)) {
-        printf("Epsilon in iteration %d = %e > %e\n", i + 1, epsilon, epsilon_);
+        if (i % 100 == 0)
+            printf("Epsilon in iteration %d = %e > %e\n", i, epsilon, epsilon_);
         eps.push_back(epsilon);
         VectorXd Bg = B_ * g_asup;
         double nu_star = std::min(1.0, (pg_asup - pg_) / (2 * pg_asup - pg_ + g_asup.dot(Bg)));
@@ -142,6 +141,8 @@ bool subBFGSBase::DescentDirection(const VectorXd& g) {
             p_ = p;
         }
         epsilon = min_M - 0.5 * pg_;
+        if (epsilon <= epsilon_)
+            printf("Epsilon in iteration %d = %e <= %e\n", i + 1, epsilon, epsilon_);
         ++i;
     }
     if (pg_asup < 0.0 && i > 0) {
