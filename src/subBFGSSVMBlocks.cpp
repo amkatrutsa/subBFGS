@@ -558,6 +558,18 @@ double subBFGSSVMBlocks::compute_accuracy() {
     return num_correct / num_blocks_;
 }
 
+void subBFGSSVMBlocks::PrintInformationCurrentIter() {
+    double current_accuracy = compute_accuracy();
+    printf("Current accuracy = %e\n", current_accuracy);
+    int num_neg_entropy_term = 0;
+    VectorXd entropy_terms = w_.tail(NUM_ENTROPY_TERMS_);
+    for (size_t i = 0; i < entropy_terms.rows(); ++i) {
+        if (entropy_terms[i] < 0)
+            ++num_neg_entropy_term;
+    }
+    printf("Number of negative entropy terms = %d\n", num_neg_entropy_term);
+}
+
 bool subBFGSSVMBlocks::check_solution(const std::string& solution_filename) {
     std::ifstream solution_file(solution_filename);
     if (!solution_file.is_open()) {

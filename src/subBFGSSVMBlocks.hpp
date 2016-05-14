@@ -58,6 +58,7 @@ class subBFGSSVMBlocks : public subBFGSBase {
         // without sorting eta vector
         void ArgSort(const std::vector<double>& eta, std::vector<sorted_blocks_idx>* sorted_idx);
         void PrintInfSupSubgrad();
+        void PrintInformationCurrentIter();
         subBFGSSVMBlocks(const subBFGSSVMBlocks& orig);
         subBFGSSVMBlocks& operator = (const subBFGSSVMBlocks& orig);
 };
