@@ -90,6 +90,7 @@ bool subBFGSBase::solve() {
             current_objective_tol = cur_diff / current_obj;
         printf("(old_obj - new_obj) / old_obj = %e\n", current_objective_tol);
         printf("Current obj = %.5f\n", new_objective);
+        PrintInformationCurrentIter();
         current_obj = new_objective;
     }
     return true;
@@ -209,5 +210,7 @@ int subBFGSBase::get_num_iter() {
 double subBFGSBase::get_objective() {
     return ComputeObjective(w_);
 }
+
+void subBFGSBase::PrintInformationCurrentIter() {}
 
 subBFGSBase::~subBFGSBase() {}

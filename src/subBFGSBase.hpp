@@ -37,6 +37,7 @@ class subBFGSBase {
         virtual double ComputeObjective(const VectorXd& w) = 0;
         virtual bool ArgSup(const VectorXd& p, const VectorXd& w, VectorXd* g) = 0;
         virtual bool DescentDirection(const VectorXd& g);
+        virtual void PrintInformationCurrentIter();
         bool LineSearch();
         subBFGSBase(const subBFGSBase& orig);
         subBFGSBase& operator = (const subBFGSBase& origin);
