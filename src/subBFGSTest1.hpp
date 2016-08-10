@@ -1,4 +1,4 @@
-
+#pragma once
 #include "subBFGSBase.hpp"
 
 class subBFGSTest1 : public subBFGSBase {
