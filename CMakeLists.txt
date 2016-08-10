@@ -1,7 +1,10 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 PROJECT(subBFGS)
 
-SET(CMAKE_CXX_COMPILER /usr/bin/clang++)
+# Allow me to specify compiler from cmake command line
+if(NOT CMAKE_CXX_COMPILER)
+    SET(CMAKE_CXX_COMPILER /usr/bin/clang++)
+endif()
 # SET(CMAKE_CXX_COMPILER /usr/bin/g++)
 
 LIST(APPEND CMAKE_CXX_FLAGS "-Wall -std=c++11 -O3 -g")
