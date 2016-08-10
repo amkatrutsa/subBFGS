@@ -30,3 +30,8 @@
 # Build files
 build/
 nbproject/
+
+# extra setting
+*.swp
+.ycm_extra_conf*
+__pychache__/
