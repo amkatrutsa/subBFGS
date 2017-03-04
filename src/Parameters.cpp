@@ -7,6 +7,7 @@ Parameters::Parameters() : C(0), blocksFile(""), modelFile(""),
                            train_validate_data_filename("") {}
 
 bool Parameters::init(int argc, char* argv[]) {
+    if(argc <= 1) return false;
     for (int i = 1; i < argc; i++) {
         if (argv[i][0] != '-') {
             std::cout << "The keys have to start with -" << std::endl;

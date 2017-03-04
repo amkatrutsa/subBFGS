@@ -1,4 +1,5 @@
 // Copyright 2015 Alexandr Katrutsa, INRIA
+#pragma once
 
 #include "subBFGSBase.hpp"
 #include <string>

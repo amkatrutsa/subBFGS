@@ -1,4 +1,5 @@
 // Copyright 2015 Alexander Katrutsa
+#pragma once
 
 #include <string>
 
